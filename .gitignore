@@ -2,3 +2,7 @@
 *.log
 .DS_Store
 Thumbs.db
+*.zip
+*.dat
+source_captioncompiler/
+infra/resource/subtitles_english.txt
