@@ -28,7 +28,7 @@ cp -r infra_dlc1_src infra_dlc1
 
 echo -e "${BLUE}making VTFs...${NC}"
 wine "vtflib/VTFCmd.exe" -folder "infra_dlc1\*.png" -flag "NOLOD" -nothumbnail -recurse 2>/dev/null
-find infra_dlc1 -type f ! -name '*.vtf' -delete
+find infra_dlc1 -type f ! -name '*.vtf' ! -name '*.res' -delete
 
 echo -e "${BLUE}making VPK...${NC}"
 vpk generate_keypair pak01
@@ -37,6 +37,6 @@ vpk -M -k pak01.publickey.vdf -K pak01.privatekey.vdf "$DIR/infra_dlc1/pak01"
 rm -rf infra_dlc1/pak01
 
 echo -e "${BLUE}packing distros...${NC}"
-zip -q -9 -r infra-ru infra platform infra_dlc1
+zip -q -9 -r infra-ru infra platform infra_dlc1 -x '*subtitles_english.txt*' -x '*gameinfo.txt*'
 
 echo -e "${BLUE}all done!${NC}"
