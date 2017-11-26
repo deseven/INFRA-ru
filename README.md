@@ -7,6 +7,6 @@ An attempt on a russian localization for [INFRA](http://store.steampowered.com/a
 | Alekartem | translation           |
 | Boldoc    | textures              |
 | deseven   | textures, translation |
-| Leshiy    | textures              |
+| Leshiy    | textures, resources   |
 | Sahar     | textures              |
 | Yesinoi   | translation           |
