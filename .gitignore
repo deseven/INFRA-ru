@@ -4,5 +4,8 @@
 Thumbs.db
 *.zip
 *.dat
+*.vdf
+vtflib/
+infra_dlc1/
 source_captioncompiler/
 infra/resource/subtitles_english.txt
