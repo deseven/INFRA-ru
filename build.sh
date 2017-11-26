@@ -27,15 +27,12 @@ wine "source_captioncompiler\captioncompiler.exe" "subtitles_russian.txt" -game 
 cp -r infra_dlc1_src infra_dlc1
 
 echo -e "${BLUE}making VTFs...${NC}"
-for file in $(find infra_dlc1 -name '*.png' -or -name '*.PNG'); do
-	wine "vtflib/VTFCmd.exe" -file "$file" -flag "NOLOD" -nothumbnail 2>/dev/null
-	rm -f "$file"
-	#echo -n
-done
+wine "vtflib/VTFCmd.exe" -folder "infra_dlc1\*.png" -flag "NOLOD" -nothumbnail -recurse 2>/dev/null
+find infra_dlc1 -type f ! -name '*.vtf' -delete
 
 echo -e "${BLUE}making VPK...${NC}"
-vpk_osx32 generate_keypair pak01
-vpk_osx32 -M -k pak01.publickey.vdf -K pak01.privatekey.vdf "$DIR/infra_dlc1/pak01"
+vpk generate_keypair pak01
+vpk -M -k pak01.publickey.vdf -K pak01.privatekey.vdf "$DIR/infra_dlc1/pak01"
 
 rm -rf infra_dlc1/pak01
 
