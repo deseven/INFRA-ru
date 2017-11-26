@@ -37,6 +37,6 @@ vpk -M -k pak01.publickey.vdf -K pak01.privatekey.vdf "$DIR/infra_dlc1/pak01"
 rm -rf infra_dlc1/pak01
 
 echo -e "${BLUE}packing distros...${NC}"
-zip -q -9 -r infra-ru infra platform infra_dlc1 -x *.txt*
+zip -q -9 -r infra-ru infra platform infra_dlc1
 
 echo -e "${BLUE}all done!${NC}"
