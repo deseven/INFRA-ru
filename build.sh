@@ -5,6 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
 
 BLUE='\033[1;34m'
+PURPLE='\033[1;35m'
 NC='\033[0m'
 
 echo -e "${BLUE}cleaning old stuff...${NC}"
@@ -26,8 +27,23 @@ wine "source_captioncompiler\captioncompiler.exe" "subtitles_russian.txt" -game 
 
 #mkdir -p infra_dlc1/pak01/materials/models/{items,props_building_detail,props_central,props_city,props_clutter} infra_dlc1/pak01/materials/{decals,vgui}
 
+defaultFlag="NOLOD"
+defaultFormat="DXT1"
+
 echo -e "${BLUE}making VTFs...${NC}"
-wine "vtflib/VTFCmd.exe" -folder "infra_dlc1\*.png" -flag "NOLOD" -nothumbnail -recurse 2>/dev/null
+while IFS= read -r -d '' file; do
+	echo "$file"
+	override=$(grep "$file" vtf-definitions.csv | head -1 | tr -d '\040\011\012\015')
+	if [ ! -z "$override" ]; then
+		overrideFlag=$(echo "$override" | cut -f2 -d",")
+		overrideFormat=$(echo "$override" | cut -f3 -d",")
+		echo -e "${PURPLE}overriding convertion params for ${file}: ${overrideFlag} ${overrideFormat}${NC}"
+		wine "vtflib/VTFCmd.exe" -file "$file" -flag "${overrideFlag}" -nothumbnail -recurse -format "${overrideFormat}" -alphaformat "${overrideFormat}" 2>/dev/null
+	else
+		wine "vtflib/VTFCmd.exe" -file "$file" -flag "${defaultFlag}" -nothumbnail -recurse -format "${defaultFormat}" -alphaformat "${defaultFormat}" 2>/dev/null
+	fi
+done < <(find infra_dlc1 -type f -name "*.png" -print0)
+
 find infra_dlc1 -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
 rm -f infra_dlc1/gameinfo.txt infra_dlc1/resource/subtitles_english.txt > /dev/null 2>&1
 

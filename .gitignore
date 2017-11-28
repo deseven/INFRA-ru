@@ -5,6 +5,8 @@ Thumbs.db
 *.zip
 *.dat
 *.vdf
+*.vtf
+*.vpk
 vtflib/
 infra_dlc1/
 source_captioncompiler/
