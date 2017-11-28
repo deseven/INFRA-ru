@@ -28,7 +28,7 @@ wine "source_captioncompiler\captioncompiler.exe" "subtitles_russian.txt" -game 
 #mkdir -p infra_dlc1/pak01/materials/models/{items,props_building_detail,props_central,props_city,props_clutter} infra_dlc1/pak01/materials/{decals,vgui}
 
 defaultFlag="NOLOD"
-defaultFormat="DXT1"
+defaultFormat="DXT5"
 
 echo -e "${BLUE}making VTFs...${NC}"
 while IFS= read -r -d '' file; do
