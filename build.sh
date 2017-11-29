@@ -29,20 +29,22 @@ wine "source_captioncompiler\captioncompiler.exe" "subtitles_russian.txt" -game 
 
 defaultFlag="NOLOD"
 defaultFormat="DXT5"
+commands=""
 
 echo -e "${BLUE}making VTFs...${NC}"
 while IFS= read -r -d '' file; do
-	echo "$file"
 	override=$(grep "$file" vtf-definitions.csv | head -1 | tr -d '\040\011\012\015')
 	if [ ! -z "$override" ]; then
 		overrideFlag=$(echo "$override" | cut -f2 -d",")
 		overrideFormat=$(echo "$override" | cut -f3 -d",")
 		echo -e "${PURPLE}overriding convertion params for ${file}: ${overrideFlag} ${overrideFormat}${NC}"
-		wine "vtflib/VTFCmd.exe" -file "$file" -flag "${overrideFlag}" -nothumbnail -recurse -format "${overrideFormat}" -alphaformat "${overrideFormat}" 2>/dev/null
+		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$overrideFlag'" -nothumbnail -recurse -format "'$overrideFormat'" -alphaformat "'$overrideFormat'" 2>/dev/null'$'\n'
 	else
-		wine "vtflib/VTFCmd.exe" -file "$file" -flag "${defaultFlag}" -nothumbnail -recurse -format "${defaultFormat}" -alphaformat "${defaultFormat}" 2>/dev/null
+		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$defaultFlag'" -nothumbnail -recurse -format "'$defaultFormat'" -alphaformat "'$defaultFormat'" 2>/dev/null'$'\n'
 	fi
 done < <(find infra_dlc1 -type f -name "*.png" -print0)
+
+echo "$commands" | parallel ::::
 
 find infra_dlc1 -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
 rm -f infra_dlc1/gameinfo.txt infra_dlc1/resource/subtitles_english.txt > /dev/null 2>&1
