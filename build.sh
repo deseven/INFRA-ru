@@ -38,9 +38,9 @@ while IFS= read -r -d '' file; do
 		overrideFlag=$(echo "$override" | cut -f2 -d",")
 		overrideFormat=$(echo "$override" | cut -f3 -d",")
 		echo -e "${PURPLE}overriding convertion params for ${file}: ${overrideFlag} ${overrideFormat}${NC}"
-		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$overrideFlag'" -recurse -format "'$overrideFormat'" -alphaformat "'$overrideFormat'" 2>/dev/null'$'\n'
+		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$overrideFlag'" -format "'$overrideFormat'" -alphaformat "'$overrideFormat'" 2>/dev/null'$'\n'
 	else
-		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$defaultFlag'" -recurse -format "'$defaultFormat'" -alphaformat "'$defaultFormat'" 2>/dev/null'$'\n'
+		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$defaultFlag'" -format "'$defaultFormat'" -alphaformat "'$defaultFormat'" 2>/dev/null'$'\n'
 	fi
 done < <(find infra_dlc1 -type f -name "*.png" -print0)
 
