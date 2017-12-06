@@ -45,6 +45,8 @@ while IFS= read -r -d '' file; do
 done < <(find infra_dlc1 -type f -name "*.png" -print0)
 
 echo "$commands" | parallel ::::
+total=$(echo "$commands" | wc -l)
+echo "$total textures packed" 
 
 find infra_dlc1 -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
 rm -f infra_dlc1/gameinfo.txt infra_dlc1/resource/subtitles_english.txt > /dev/null 2>&1
