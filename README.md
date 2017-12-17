@@ -2,7 +2,7 @@
 An attempt on a russian localization for [INFRA](http://store.steampowered.com/app/251110/INFRA/).
 
 ## lead translators
-Ivan "deseven" Novokhatski
+Ivan "deseven" Novokhatski  
 Alexey "Leshiy" Vedrov
 
 ## contributors
