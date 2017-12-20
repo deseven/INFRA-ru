@@ -12,7 +12,6 @@ echo -e "${BLUE}cleaning old stuff...${NC}"
 rm -f infra/resource/*.dat
 rm -rf infra_dlc1
 rm -f infra-ru.zip infra-ru-override.zip
-rm -f pak01.publickey.vdf pak01.privatekey.vdf
 
 cp -r infra_dlc1_src infra_dlc1
 
