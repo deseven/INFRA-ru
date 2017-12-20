@@ -31,6 +31,8 @@ defaultFlag="NOLOD"
 defaultFormat="DXT5"
 commands=""
 
+convert logo.png -gravity South -background none -font Calibri -pointsize 16 -fill '#eeeeee' -annotate +0+60 "russian localization r$(git rev-parse --short HEAD), built on $(date '+%d.%m.%Y %H:%I:%S')" infra_dlc1/pak01/materials/vgui/logo.png
+
 echo -e "${BLUE}making VTFs...${NC}"
 while IFS= read -r -d '' file; do
 	override=$(grep "$file" vtf-definitions.csv | head -1 | tr -d '\040\011\012\015')
@@ -45,14 +47,16 @@ while IFS= read -r -d '' file; do
 done < <(find infra_dlc1 -type f -name "*.png" -print0)
 
 echo "$commands" | parallel ::::
-total=$(echo "$commands" | wc -l)
-echo "$total textures packed" 
+total=$(echo "$commands" | wc -l | xargs)
+echo -e "${PURPLE}$total textures packed${NC}" 
 
 find infra_dlc1 -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
 rm -f infra_dlc1/gameinfo.txt infra_dlc1/resource/subtitles_english.txt > /dev/null 2>&1
 
 echo -e "${BLUE}making VPK...${NC}"
-vpk generate_keypair pak01
+if [ ! -f "pak01.publickey.vdf" ] || [ ! -f "pak01.privatekey.vdf" ]; then
+	vpk generate_keypair pak01
+fi
 vpk -M -k pak01.publickey.vdf -K pak01.privatekey.vdf "$DIR/infra_dlc1/pak01"
 
 rm -rf infra_dlc1/pak01
