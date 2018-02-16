@@ -10,10 +10,11 @@ Alexey "Leshiy" Vedrov
 |--------------|--------------|
 | Alekartem    | translation  |
 | Boldoc       | textures     |
+| IARSpider    | translation  |
 | makc_ar      | translation  |
 | morozkin28   | translation  |
 | static77     | translation  |
 | stevengerard | translation  |
-| SileNTViP    | translation  |
 | Sasha Kul    | textures     |
+| SileNTViP    | translation  |
 | Yesinoi      | translation  |
