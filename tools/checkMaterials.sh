@@ -4,7 +4,7 @@ if [ -z "$1" ] || [ -z "$2" ]; then
 	echo "syntax: $0 materials_list materials_dir"
 fi
 
-for file in "$2/"*.png; do
+for file in "$2/"*; do
 	file=$(basename $(dirname $file))/$(basename $file)
 	file="${file%.*}"
 	file="${file%_normal}"
