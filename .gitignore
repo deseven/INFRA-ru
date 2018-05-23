@@ -3,13 +3,14 @@
 .DS_Store
 Thumbs.db
 *.zip
+*.7z
 *.dat
 *.vdf
 *.vtf
 *.vpk
 vtflib/
-infra_dlc1/
+infra_russian/
 source_captioncompiler/
-infra_dlc1_src/resource/subtitles_english.txt
+infra_russian_src/resource/subtitles_english.txt
 Translating_Phoshop_Sources/
 tools/materials.txt
