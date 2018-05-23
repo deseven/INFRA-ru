@@ -11,7 +11,7 @@ NC='\033[0m'
 echo -e "${BLUE}cleaning old stuff...${NC}"
 rm -f infra/resource/*.dat
 rm -rf infra_russian
-rm -f infra-ru.zip infra-ru-override.zip
+rm -f infra-ru.7z
 
 cp -r infra_russian_src infra_russian
 
