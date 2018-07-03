@@ -43,7 +43,7 @@ while IFS= read -r -d '' file; do
 	else
 		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$defaultFlag'" -format "'$defaultFormat'" -alphaformat "'$defaultFormat'" 2>/dev/null'$'\n'
 	fi
-done < <(find infra_russian -type f -iname "*.png" -o -iname '*.tga' -print0)
+done < <(find infra_russian -type f \( -iname "*.png" -o -iname '*.tga' \) -print0)
 
 echo "$commands" | parallel ::::
 total=$(echo "$commands" | wc -l | xargs)
