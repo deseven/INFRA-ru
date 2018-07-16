@@ -10,6 +10,7 @@ Alexey "Leshiy" Vedrov
 |--------------|--------------|
 | Alekartem    | translation  |
 | Boldoc       | textures     |
+| Dante_2834   | playtest     |
 | IARSpider    | translation  |
 | makc_ar      | translation  |
 | morozkin28   | translation  |
