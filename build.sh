@@ -10,10 +10,15 @@ NC='\033[0m'
 
 echo -e "${BLUE}cleaning old stuff...${NC}"
 rm -f infra/resource/*.dat
-rm -rf infra_russian
+rm -f infra_russian/pak01/materials/vgui/logo.vtf
+rm -rf infra_russian/pak0*.vpk
 rm -f infra-ru.7z
-
-cp -r infra_russian_src infra_russian
+if [ "$1" == "clean" ]; then
+	rm -rf infra_russian
+	cp -r infra_russian_src infra_russian
+else
+	cp -rf infra_russian_src/ infra_russian
+fi
 
 echo -e "${BLUE}compiling closecaption:${NC}"
 wine "source_captioncompiler\captioncompiler.exe" "closecaption_russian.txt" -game "infra_russian" 2>/dev/null
@@ -34,6 +39,10 @@ convert logo.png -gravity South -background none -font Tahoma -pointsize 16 -fil
 
 echo -e "${BLUE}making VTFs...${NC}"
 while IFS= read -r -d '' file; do
+	if [ -f "${file%%.*}.vtf" ]; then
+		echo "skipping $file (VTF found)"
+		continue
+	fi
 	override=$(grep "$file" vtf-definitions.csv | head -1 | tr -d '\040\011\012\015')
 	if [ ! -z "$override" ]; then
 		overrideFlag=$(echo "$override" | cut -f2 -d",")
@@ -43,10 +52,11 @@ while IFS= read -r -d '' file; do
 	else
 		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$defaultFlag'" -format "'$defaultFormat'" -alphaformat "'$defaultFormat'" 2>/dev/null'$'\n'
 	fi
-done < <(find infra_russian -type f \( -iname "*.png" -o -iname '*.tga' \) -print0)
+done < <(find infra_russian -type f \( -iname '*.png' -o -iname '*.tga' \) -print0)
 
 echo "$commands" | parallel ::::
-total=$(echo "$commands" | wc -l | xargs)
+total=$(echo "$commands" | grep -c '')
+total="$(($total-1))"
 echo -e "${PURPLE}built $total textures${NC}" 
 
 find infra_russian -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
@@ -58,10 +68,10 @@ if [ ! -f "pak01.publickey.vdf" ] || [ ! -f "pak01.privatekey.vdf" ]; then
 fi
 vpk -M -k pak01.publickey.vdf -K pak01.privatekey.vdf "$DIR/infra_russian/pak01"
 
-rm -rf infra_russian/pak01
+#rm -rf infra_russian/pak01
 
 echo -e "${BLUE}packing distro...${NC}"
 #zip -q -9 -r infra-ru infra_russian
-7za a -r -t7z -mx9 infra-ru.7z infra_russian
+7za a -r -t7z -xr!pak01 -mx9 infra-ru.7z infra_russian
 
 echo -e "${BLUE}all done!${NC}"
