@@ -82,3 +82,9 @@ infra_russian/pak01/materials/models/props_pipes/metal_pipe_002_decal_skin1.png,
 infra_russian/pak01/materials/models/props_pipes/metal_pipe_002_decal_skin2.png,NOLOD,RGBA8888
 infra_russian/pak01/materials/models/props_pipes/metal_pipe_002_decal_skin3.png,NOLOD,RGBA8888
 infra_russian/pak01/materials/models/props_sign/decal_001_skin2.png,NOLOD,RGBA8888
+infra_russian_src/pak01/materials/decals/text_random_011c.png,NOLOD,RGBA8888
+infra_russian_src/pak01/materials/decals/text_random_011b.png,NOLOD,RGBA8888
+infra_russian_src/pak01/materials/decals/text_random_011.png,NOLOD,RGBA8888
+infra_russian_src/pak01/materials/decals/text_random_010c.png,NOLOD,RGBA8888
+infra_russian_src/pak01/materials/decals/text_random_010b.png,NOLOD,RGBA8888
+infra_russian_src/pak01/materials/decals/text_random_010.png,NOLOD,RGBA8888
