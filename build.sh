@@ -13,7 +13,7 @@ rm -f infra/resource/*.dat
 rm -f infra_russian/pak01/materials/vgui/logo.vtf
 rm -rf infra_russian/pak0*.vpk
 rm -f infra-ru.7z
-if [ "$1" == "clean" ]; then
+if [ "$1" == "clean" ] || [ "$1" == "release" ]; then
 	rm -rf infra_russian
 	cp -r infra_russian_src infra_russian
 else
@@ -35,7 +35,9 @@ defaultFlag="NOLOD"
 defaultFormat="DXT5"
 commands=""
 
-convert logo.png -gravity South -background none -font Tahoma -pointsize 16 -fill '#eeeeee' -annotate +0+60 "russian localization rev.$(git rev-parse --short HEAD), built on $(date '+%d.%m.%Y %H:%I:%S')" infra_russian/pak01/materials/vgui/logo.png
+if [ "$1" != "release" ]; then
+	convert logo.png -gravity South -background none -font Tahoma -pointsize 16 -fill '#eeeeee' -annotate +0+60 "russian localization rev.$(git rev-parse --short HEAD), built on $(date '+%d.%m.%Y %H:%I:%S')" infra_russian/pak01/materials/vgui/logo.png
+fi
 
 echo -e "${BLUE}making VTFs...${NC}"
 while IFS= read -r -d '' file; do
