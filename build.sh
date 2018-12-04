@@ -57,9 +57,11 @@ while IFS= read -r -d '' file; do
 done < <(find infra_russian -type f \( -iname '*.png' -o -iname '*.tga' \) -print0)
 
 echo "$commands" | parallel ::::
-total=$(echo "$commands" | grep -c '')
-total="$(($total-1))"
-echo -e "${PURPLE}built $total textures${NC}" 
+totalBuilt=$(echo "$commands" | grep -c '')
+totalBuilt="$(($total-1))"
+total=$(find infra_russian -type f -iname '*.vtf' | grep -c '')
+echo -e "${PURPLE}built $totalBuilt textures${NC}"
+echo -e "${PURPLE}$total textures in total${NC}" 
 
 find infra_russian -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
 rm -f infra_russian/gameinfo.txt infra_russian/resource/subtitles_english.txt > /dev/null 2>&1
