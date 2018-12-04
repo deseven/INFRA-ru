@@ -58,7 +58,7 @@ done < <(find infra_russian -type f \( -iname '*.png' -o -iname '*.tga' \) -prin
 
 echo "$commands" | parallel ::::
 totalBuilt=$(echo "$commands" | grep -c '')
-totalBuilt="$(($total-1))"
+totalBuilt="$(($totalBuilt-1))"
 total=$(find infra_russian -type f -iname '*.vtf' | grep -c '')
 echo -e "${PURPLE}built $totalBuilt textures${NC}"
 echo -e "${PURPLE}$total textures in total${NC}" 
