@@ -6,6 +6,7 @@ cd "$DIR"
 
 BLUE='\033[1;34m'
 PURPLE='\033[1;35m'
+RED='\033[1;31m'
 NC='\033[0m'
 
 echo -e "${BLUE}cleaning old stuff...${NC}"
@@ -15,10 +16,9 @@ rm -rf infra_russian/pak0*.vpk
 rm -f infra-ru.7z
 if [ "$1" == "clean" ] || [ "$1" == "release" ]; then
 	rm -rf infra_russian
-	cp -r infra_russian_src infra_russian
-else
-	cp -rf infra_russian_src/ infra_russian
 fi
+
+rsync -am --include='*.png' --include='*.tga' --include='*.vtf' --include='*.txt' --include='*/' --exclude='*' infra_russian_src/ infra_russian/
 
 echo -e "${BLUE}compiling closecaption:${NC}"
 wine "source_captioncompiler\captioncompiler.exe" "closecaption_russian.txt" -game "infra_russian" 2>/dev/null
@@ -54,9 +54,12 @@ while IFS= read -r -d '' file; do
 	else
 		commands="$commands"'wine "vtflib/VTFCmd.exe" -file "'$file'" -flag "'$defaultFlag'" -format "'$defaultFormat'" -alphaformat "'$defaultFormat'" 2>/dev/null'$'\n'
 	fi
+	commands_check="$commands_check[ -f \"${file%%.*}.vtf\" ] || echo -e \"${RED} = = = file ${file%%.*}.vtf does not exist = = =${NC}\""$'\n'
+
 done < <(find infra_russian -type f \( -iname '*.png' -o -iname '*.tga' \) -print0)
 
 echo "$commands" | parallel ::::
+echo "$commands_check" | parallel ::::
 totalBuilt=$(echo "$commands" | grep -c '')
 totalBuilt="$(($totalBuilt-1))"
 total=$(find infra_russian -type f -iname '*.vtf' | grep -c '')

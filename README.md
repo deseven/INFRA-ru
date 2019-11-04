@@ -1,5 +1,5 @@
-## infra-ru
-An attempt on a russian localisation for [INFRA](http://store.steampowered.com/app/251110/INFRA/).
+![](https://raw.githubusercontent.com/deseven/infra-ru/master/logo.png)  
+Russian localization for [INFRA](http://store.steampowered.com/app/251110/INFRA/).
 
 ## lead translators
 Ivan 'deseven' Novokhatski  
