@@ -68,11 +68,8 @@ done < <(find infra_russian -type f \( -iname '*.png' -o -iname '*.tga' \) -prin
 
 echo "$commands" | parallel --bar :::: 2>&3
 echo "$commands_check" | parallel ::::
-#totalBuilt=$(echo "$commands" | grep -c '')
-#totalBuilt="$(($totalBuilt-1))"
 total=$(find infra_russian -type f -iname '*.vtf' | grep -c '')
-#echo -e "${PURPLE}built $totalBuilt textures${NC}" 1>&3
-echo -e "${PURPLE}$total textures in total${NC}" 1>&3
+echo -e "${PURPLE}$total total textures${NC}" 1>&3
 
 find infra_russian -type f ! -name '*.vtf' ! -name '*.res' ! -name '*.dat' ! -name '*.txt' -delete
 rm -f infra_russian/gameinfo.txt infra_russian/resource/subtitles_english.txt
