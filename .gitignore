@@ -7,6 +7,7 @@ Thumbs.db
 *.dat
 *.vdf
 *.vpk
+*.idlk
 vtflib/
 infra_russian/
 source_captioncompiler/
