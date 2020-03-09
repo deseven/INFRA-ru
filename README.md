@@ -23,7 +23,7 @@ Alexey 'Leshiy' Vedrov
 | Yesinoi               | translation  |
 
 ## latest release
-[1.1.1](https://github.com/deseven/infra-ru/releases/tag/1.1.1) is available in the game  
+[1.2.1](https://github.com/deseven/infra-ru/releases/tag/1.2.1) is available in the game  
 
 ## sources
 There are sources for almost everything in [afphoto](https://affinity.serif.com/en-gb/photo/) and psd format, feel free to use them if you need, but please mention this repo somewhere.
